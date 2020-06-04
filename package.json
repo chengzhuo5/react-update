@@ -18,19 +18,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jianghai/react-update.git"
+    "url": "git+https://github.com/chengzhuo5/react-update.git"
   },
   "keywords": [
     "react",
     "immutability",
     "utils"
   ],
-  "author": "jianghai1007@gmail.com",
+  "author": "chengzhuo5@qq.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jianghai/react-update/issues"
+    "url": "https://github.com/chengzhuo5/react-update/issues"
   },
-  "homepage": "https://github.com/jianghai/react-update#readme",
+  "homepage": "https://github.com/chengzhuo5/react-update#readme",
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.12.0",
     "immutability-helper": "^2.0.0"
