@@ -85,7 +85,7 @@ function updateState(...args) {
   const [type, path, value] = args
   const nextState = {}
 
-  const updateNextState = (type, path, value) => {
+  const updateNextState = (type, path, value, state = this.state) => {
     if (isPlainObject(path)) {
       // For multipe props
       Object.keys(path).forEach((key) => {
@@ -98,7 +98,7 @@ function updateState(...args) {
         nextState[prop] = value
       } else {
         nextState[prop] = updateHelper.update(
-          this.state[prop],
+          state[prop],
           type,
           remainPath,
           value
@@ -110,7 +110,9 @@ function updateState(...args) {
   updateNextState(type, path, value)
   this.setState(nextState, () => (updateFlag = true))
   if (!updateFlag) {
-    this.setState(this.state, () => {
+    this.setState(this.state) // 还原状态更改
+    Promise.resolve().then(() => {
+      // 在微任务中更改状态
       updateNextState(type, path, value)
       this.setState(nextState, () => (updateFlag = true))
     })
