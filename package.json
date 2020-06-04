@@ -1,6 +1,6 @@
 {
   "name": "@mi/react-update",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "Make setState easily and immutably",
   "main": "lib/index.js",
   "scripts": {
