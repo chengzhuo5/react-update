@@ -107,7 +107,6 @@ function updateState(...args) {
   let updateFlag = false
   updateNextState(type, path, value)
   this.setState(nextState, () => updateFlag = true)
-  console.log(updateFlag)
   if (!updateFlag) {
     new Promise(resolve=>resolve()).then(() => {
       updateNextState(type, path, value)
