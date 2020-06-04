@@ -1,5 +1,5 @@
 {
-  "name": "@mi/react-update",
+  "name": "react-update",
   "version": "0.4.7",
   "description": "Make setState easily and immutably",
   "main": "lib/index.js",
@@ -9,7 +9,6 @@
     "unit": "jest",
     "compile": "babel src -d lib",
     "github": "git remote set-url origin https://github.com/chengzhuo5/react-update.git",
-    "gitmi": "git remote set-url origin https://git.n.xiaomi.com/mcfe/react-update.git",
     "release": "npm run test && npm run compile && npm version patch && npm publish && git push"
   },
   "repository": {
