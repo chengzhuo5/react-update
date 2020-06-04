@@ -9,7 +9,7 @@
     "unit": "jest",
     "compile": "babel src -d lib",
     "github": "git remote set-url origin https://github.com/chengzhuo5/react-update.git",
-    "release": "npm run test && npm run compile && nrm use npm && npm version patch && npm publish && git push"
+    "release": "npm run test && npm run compile && nrm use npm && npm run github && npm version patch && npm publish && git push"
   },
   "husky": {
     "hooks": {
