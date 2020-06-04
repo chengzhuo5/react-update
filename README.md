@@ -15,14 +15,14 @@ So, why not use [immutability-helper](https://github.com/kolodny/immutability-he
 ## Installation
 
 ```sh
-npm i --save react-update
+npm i --save minar-react-update
 ```
 
 
 ## Todo Demo
 
 ```javascript
-import update from 'react-update'
+import update from 'minar-react-update'
 
 class Todos extends Component {
 
@@ -64,7 +64,7 @@ class Todos extends Component {
 ### Bind component and execute setState automatically
 
 ```javascript
-import update from 'react-update'
+import update from 'minar-react-update'
 
 class App extends Component {
   
@@ -100,7 +100,7 @@ class App extends Component {
 ### Silent usage
 
 ```javascript
-import update from 'react-update'
+import update from 'minar-react-update'
 
 const myData = {x: {y: 0}}
 const newData = update(myData, 'set', 'x.y', 1)
@@ -117,7 +117,7 @@ console.log(newData) // {x: {y: 1}}
 - Remove console info when state change.
 - Add silent usage which would not execute setState automatically.
 ```js
-import update from 'react-update'
+import update from 'minar-react-update'
 
 const myData = {x: {y: 1}}
 const newData = update(myData, 'set', 'x.y', 2)
