@@ -11,6 +11,11 @@
     "github": "git remote set-url origin https://github.com/chengzhuo5/react-update.git",
     "release": "npm run test && npm run compile && npm version patch && npm publish && git push"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run github"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jianghai/react-update.git"

@@ -10,23 +10,21 @@
 import immutabilityUpdate from 'immutability-helper'
 
 const commands = {
-
   set(value) {
-    return {$set: value}
+    return { $set: value }
   },
 
   push(value) {
-    return {$push: [value]}
+    return { $push: [value] }
   },
-  
+
   splice(value) {
-    return {$splice: [[value, 1]]}
-  }
+    return { $splice: [[value, 1]] }
+  },
 }
 
 // Immutability update data using type, path, value.
 const updateHelper = {
-
   getImmutabilitySugarCommand(type, value) {
     return commands[type](value)
   },
@@ -39,7 +37,7 @@ const updateHelper = {
       let temp = target
       if (Array.isArray(path)) {
         lastKey = path.pop()
-        path.forEach(key => {
+        path.forEach((key) => {
           temp[key] = {}
           temp = temp[key]
         })
@@ -57,7 +55,7 @@ const updateHelper = {
     const command = updateHelper.getImmutabilitySugarCommand(type, value)
     const sugar = updateHelper.getNestedData(path, command)
     return immutabilityUpdate(source, sugar)
-  }
+  },
 }
 
 // const LAST_STATE = '__lastState'
@@ -69,7 +67,7 @@ function isPlainObject(obj) {
 // 'a.b.c' => ['a', 'b', 'c']
 function getPathArray(path) {
   if (typeof path === 'string') {
-    path = path.split(/\.|\[|\]/).filter(v => !!v)
+    path = path.split(/\.|\[|\]/).filter((v) => !!v)
   }
   return path
 }
@@ -84,14 +82,13 @@ function getDestructPath(path) {
 }
 
 function updateState(...args) {
-
   const [type, path, value] = args
   const nextState = {}
 
   const updateNextState = (type, path, value) => {
     if (isPlainObject(path)) {
       // For multipe props
-      Object.keys(path).forEach(key => {
+      Object.keys(path).forEach((key) => {
         updateNextState(type, key, path[key])
       })
     } else {
@@ -100,17 +97,24 @@ function updateState(...args) {
         // No need to update immutably
         nextState[prop] = value
       } else {
-        nextState[prop] = updateHelper.update(this.state[prop], type, remainPath, value)
+        nextState[prop] = updateHelper.update(
+          this.state[prop],
+          type,
+          remainPath,
+          value
+        )
       }
     }
   }
   let updateFlag = false
   updateNextState(type, path, value)
-  this.setState(nextState, () => updateFlag = true)
+  this.setState(nextState, () => (updateFlag = true))
   if (!updateFlag) {
-    new Promise(resolve=>resolve()).then(() => {
-      updateNextState(type, path, value)
-      this.setState(nextState, () => updateFlag = true)
+    this.setState(this.state, () => {
+      new Promise((resolve) => resolve()).then(() => {
+        updateNextState(type, path, value)
+        this.setState(nextState, () => (updateFlag = true))
+      })
     })
   }
   const keys = Object.keys(nextState)
@@ -122,12 +126,12 @@ function updateSilent(...args) {
   return updateHelper.update(source, type, getPathArray(path), value)
 }
 
-// If you bind update to the instance of React Component, the arguments could be 
-// [type, path, value] or [type, {path1: value1, path2: value2}] which was changed 
-// based on the component state and execute stateState automatically. 
-// Another way, if you call update purely, the argumets could be 
+// If you bind update to the instance of React Component, the arguments could be
+// [type, path, value] or [type, {path1: value1, path2: value2}] which was changed
+// based on the component state and execute stateState automatically.
+// Another way, if you call update purely, the argumets could be
 // [target, type, path, value], the path is not required and will not execute stateState.
-// Anyway, the return value of update would be the newData, if you changed multuple 
+// Anyway, the return value of update would be the newData, if you changed multuple
 // props, the newData would be an key-value object.
 function update(...args) {
   if (this && this.isReactComponent) {
