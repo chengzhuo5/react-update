@@ -111,10 +111,8 @@ function updateState(...args) {
   this.setState(nextState, () => (updateFlag = true))
   if (!updateFlag) {
     this.setState(this.state, () => {
-      new Promise((resolve) => resolve()).then(() => {
-        updateNextState(type, path, value)
-        this.setState(nextState, () => (updateFlag = true))
-      })
+      updateNextState(type, path, value)
+      this.setState(nextState, () => (updateFlag = true))
     })
   }
   const keys = Object.keys(nextState)
