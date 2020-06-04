@@ -11,11 +11,7 @@
     "github": "git remote set-url origin https://github.com/chengzhuo5/react-update.git",
     "release": "npm run test && npm run compile && nrm use npm && npm version patch && npm publish && git push"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run github"
-    }
-  },
+  "pre-commit": ["github"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chengzhuo5/react-update.git"
@@ -45,6 +41,7 @@
     "eslint-cli": "^1.1.0",
     "jasmine": "^2.4.1",
     "jest-cli": "^13.2.3",
+    "pre-commit": "^1.2.2",
     "react": "^15.2.1",
     "react-addons-test-utils": "^15.2.1",
     "react-dom": "^15.2.1"
